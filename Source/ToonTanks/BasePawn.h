@@ -19,6 +19,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	
+	/*forward declaring this type to avoid the inclusion of the header file for it here in the .h file pursuant to best practices.  
+	Only a pointer is needed here.  However, we do need to include it in the BasePawn.cpp file because we need the implementation details
+	in order to use it.
+	*/
+	UPROPERTY()
+	class UCapsuleComponent* CapsuleComp; 
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
