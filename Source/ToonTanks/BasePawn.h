@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+//this is basically an "include" guard so that this header file is only included once in a particular file -- bhd
 #pragma once
 
 #include "CoreMinimal.h"
@@ -23,10 +24,19 @@ private:
 	
 	/*forward declaring this type to avoid the inclusion of the header file for it here in the .h file pursuant to best practices.  
 	Only a pointer is needed here.  However, we do need to include it in the BasePawn.cpp file because we need the implementation details
-	in order to use it.
+	in order to use it. -- bhd
 	*/
 	UPROPERTY()
 	class UCapsuleComponent* CapsuleComp; 
+
+	UPROPERTY()
+	UStaticMeshComponent* BaseMesh; 
+
+	UPROPERTY()
+	UStaticMeshComponent* TurretMesh;
+
+	UPROPERTY()
+	USceneComponent* ProjectileSpawnPoint;
 
 public:	
 	// Called every frame
