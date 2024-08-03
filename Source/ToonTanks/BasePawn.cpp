@@ -11,6 +11,7 @@ ABasePawn::ABasePawn()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
+	//CapsuleComp->SetupAttachment(RootComponent);
 	RootComponent = CapsuleComp;
 
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Mesh"));
