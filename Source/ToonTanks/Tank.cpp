@@ -18,3 +18,15 @@ ATank::ATank()
 
 }
 
+void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+    Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+    //note the use of the "address of" operator here to pass the function in -- bhd
+    PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
+}
+
+void ATank::Move(float value)
+{
+    UE_LOG(LogTemp, Warning, TEXT("Value: %f"), value);
+}
