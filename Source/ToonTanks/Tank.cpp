@@ -34,5 +34,5 @@ void ATank::Move(float Value)
     double DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
     //X = Value * DeltaTime * Speed
     DeltaLocation.X = Value * Speed * DeltaTime;
-    AddActorLocalOffset(DeltaLocation);
+    AddActorLocalOffset(DeltaLocation, true);
 }
