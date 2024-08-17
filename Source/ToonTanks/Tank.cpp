@@ -25,14 +25,25 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
     //note the use of the "address of" operator here to pass the function in -- bhd
     PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
+    PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
 }
 
 void ATank::Move(float Value)
 {
-    FVector DeltaLocation(0.f); //alternatively assign FVector::ZeroVector for the same result --bhd
+    FVector DeltaLocation = FVector::ZeroVector;
 
     double DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
     //X = Value * DeltaTime * Speed
     DeltaLocation.X = Value * Speed * DeltaTime;
     AddActorLocalOffset(DeltaLocation, true);
+}
+
+void ATank::Turn(float Value)
+{
+    FRotator DeltaRotation = FRotator::ZeroRotator;
+    // Yaw = Value * DeltaTime * TurnRate;
+
+    double DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
+    DeltaRotation.Yaw = Value * TurnRate * DeltaTime;
+    AddActorLocalRotation(DeltaRotation, true);
 }
