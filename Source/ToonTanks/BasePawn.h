@@ -16,10 +16,6 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 private:
 	
 	/*forward declaring this type to avoid the inclusion of the header file for it here in the .h file pursuant to best practices.  
