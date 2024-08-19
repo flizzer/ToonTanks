@@ -37,6 +37,7 @@ void ATank::Tick(float DeltaTime)
     //check if PlayerControllerRef is a valid pointer; returns true if not a NULL pointer -- bhd
     if (PlayerControllerRef)
     {
+        //HitResult being passed by reference and populated kind of like an "out" param in C#
         FHitResult HitResult;
         PlayerControllerRef->GetHitResultUnderCursor(
             ECollisionChannel::ECC_Visibility,
