@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 
 ATank::ATank() 
 {
@@ -26,6 +27,32 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
     //note the use of the "address of" operator here to pass the function in -- bhd
     PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
     PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
+}
+
+// Called every frame
+void ATank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+    //check if PlayerControllerRef is a valid pointer; returns true if not a NULL pointer -- bhd
+    if (PlayerControllerRef)
+    {
+        FHitResult HitResult;
+        PlayerControllerRef->GetHitResultUnderCursor(
+            ECollisionChannel::ECC_Visibility,
+            false,
+            HitResult
+        );
+        DrawDebugSphere(
+            GetWorld(),
+            HitResult.ImpactPoint + FVector(0.f, 0.f, 200.f),
+            25.f,
+            12,
+            FColor::Red,
+            false,
+            -1.f
+        );
+    }
 }
 
 // Called when the game starts or when spawned
