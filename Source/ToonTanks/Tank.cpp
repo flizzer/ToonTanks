@@ -5,7 +5,10 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "DrawDebugHelpers.h"
+
+//DEBUG
+//Actually is included by default so technically don't need it -- bhd
+//#include "DrawDebugHelpers.h"
 
 ATank::ATank() 
 {
@@ -44,14 +47,18 @@ void ATank::Tick(float DeltaTime)
             false,
             HitResult
         );
+
+        RotateTurret(HitResult.ImpactPoint);
+
+        //DEBUG
         DrawDebugSphere(
             GetWorld(),
-            HitResult.ImpactPoint + FVector(0.f, 0.f, 200.f),
-            25.f,
-            12,
-            FColor::Red,
-            false,
-            -1.f
+            HitResult.ImpactPoint //+ FVector(0.f, 0.f, 200.f)
+            ,25.f
+            ,12
+            ,FColor::Red
+            ,false
+            ,-1.f
         );
     }
 }
