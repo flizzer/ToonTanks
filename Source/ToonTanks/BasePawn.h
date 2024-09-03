@@ -20,6 +20,8 @@ protected:
 
 	void RotateTurret(FVector LookAtTarget);
 
+	void Fire();
+
 private:
 	
 	/*forward declaring this type to avoid the inclusion of the header file for it here in the .h file pursuant to best practices.  

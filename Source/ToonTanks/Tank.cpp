@@ -27,9 +27,13 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
     Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+    //Access Mapping Bindings
     //note the use of the "address of" operator here to pass the function in -- bhd
     PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
     PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
+
+    //Action Mapping Bindings
+    PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATank::Fire);
 }
 
 // Called every frame
@@ -51,15 +55,15 @@ void ATank::Tick(float DeltaTime)
         RotateTurret(HitResult.ImpactPoint);
 
         //DEBUG
-        DrawDebugSphere(
-            GetWorld(),
-            HitResult.ImpactPoint //+ FVector(0.f, 0.f, 200.f)
-            ,25.f
-            ,12
-            ,FColor::Red
-            ,false
-            ,-1.f
-        );
+        // DrawDebugSphere(
+        //     GetWorld(),
+        //     HitResult.ImpactPoint //+ FVector(0.f, 0.f, 200.f)
+        //     ,25.f
+        //     ,12
+        //     ,FColor::Red
+        //     ,false
+        //     ,-1.f
+        // );
     }
 }
 
