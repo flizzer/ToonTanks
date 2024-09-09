@@ -29,4 +29,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float FireRange = 10.f;
 
+	FTimerHandle FirerateTimerHandle;
+	float FireRate = 2.f;
+	void CheckFireCondition();
+	bool InFireRange();
 };
