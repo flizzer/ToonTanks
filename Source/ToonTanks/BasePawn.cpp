@@ -4,7 +4,8 @@
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "DrawDebugHelpers.h" //Don't really need this though since already included in the inheritance chain further up -- bhd
+//#include "DrawDebugHelpers.h" //Don't really need this though since already included in the inheritance chain further up -- bhd
+#include "Projectile.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -43,14 +44,20 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 void ABasePawn::Fire()
 {
     //DEBUG
-    DrawDebugSphere(
-        GetWorld()
-        , ProjectileSpawnPoint->GetComponentLocation()
-        //, GetComponentLocation(this->ProjectileSpawnPoint)
-        , 25.f
-        , 12
-        , FColor::Red
-        , false
-        , 3.0f
-    );
+    // DrawDebugSphere(
+    //     GetWorld()
+    //     , ProjectileSpawnPoint->GetComponentLocation()
+    //     //, GetComponentLocation(this->ProjectileSpawnPoint)
+    //     , 25.f
+    //     , 12
+    //     , FColor::Red
+    //     , false
+    //     , 3.0f
+    // );
+
+	GetWorld()->SpawnActor<AProjectile>(
+		ProjectileClass
+		, ProjectileSpawnPoint->GetComponentLocation() 
+		, ProjectileSpawnPoint->GetComponentRotation()
+	);
 }
