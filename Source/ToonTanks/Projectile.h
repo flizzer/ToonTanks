@@ -28,4 +28,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UStaticMeshComponent* StaticMesh; 
 
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	class UProjectileMovementComponent* ProjectileMovementComponent; 
+
 };
