@@ -10,8 +10,9 @@ AProjectile::AProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
-	StaticMesh->SetupAttachment(RootComponent);
+	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
+	//ProjectileMesh->SetupAttachment(RootComponent);
+	RootComponent = ProjectileMesh;
 
 	ProjectileMovementComponent = 
 		CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement Component"));
@@ -23,6 +24,8 @@ AProjectile::AProjectile()
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+
+	ProjectileMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 	
 }
 
@@ -33,3 +36,14 @@ void AProjectile::Tick(float DeltaTime)
 
 }
 
+void AProjectile::OnHit(
+	UPrimitiveComponent* HitComp
+		, AActor* OtherActor
+		, UPrimitiveComponent* OtherComp
+		, FVector NormalImpulse
+		, const FHitResult& Hit
+)
+{
+	//Only works when I turn "Simulate Physics" off...why??? -- bhd
+	UE_LOG(LogTemp, Warning, TEXT("OnHit"));
+}
