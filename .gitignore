@@ -5,6 +5,10 @@
 # Do not ignore git files in the root of the repo.
 !/.git*
 
+# README and Images
+!/README.md
+!/*.png
+
 # Do not ignore current project's `.uproject`.
 !//*.uproject
 
