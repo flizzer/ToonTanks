@@ -44,6 +44,6 @@ void AProjectile::OnHit(
 		, const FHitResult& Hit
 )
 {
-	//Only works when I turn "Simulate Physics" off...why??? -- bhd
+	//Only works when "Simulate Physics" is disabled, because that enables the use of Hit Events -- bhd
 	UE_LOG(LogTemp, Warning, TEXT("OnHit"));
 }
