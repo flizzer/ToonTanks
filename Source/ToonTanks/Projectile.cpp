@@ -3,6 +3,8 @@
 
 #include "Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "GameFramework/DamageType.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -45,5 +47,25 @@ void AProjectile::OnHit(
 )
 {
 	//Only works when "Simulate Physics" is disabled, because that enables the use of Hit Events -- bhd
-	UE_LOG(LogTemp, Warning, TEXT("OnHit"));
+	//UE_LOG(LogTemp, Warning, TEXT("OnHit"));
+
+	AActor* MyOwner = GetOwner();
+	if (MyOwner == nullptr) return;
+
+	AController* MyOwnerInstigator = MyOwner->GetInstigatorController();
+	UClass* DamageTypeClass = UDamageType::StaticClass();
+
+	//Verify that the OtherActor is not null and that the other actor is not ourselves.
+	//We also check to verify we're not damaging our owner
+	if (OtherActor && OtherActor != this && OtherActor != MyOwner)
+	{
+		UGameplayStatics::ApplyDamage(
+			OtherActor,
+			Damage,
+			MyOwnerInstigator,
+			this,
+			DamageTypeClass
+			);
+		Destroy();	
+	}
 }

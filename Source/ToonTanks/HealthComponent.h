@@ -24,8 +24,18 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float MaxHealth = 100.f;
-	
+
 	float Health = 0.f;
+
+	//Another multicast delegate so the documentation doesn't do a great job at describing what parameters are required here
+	//since the "function signatures for these are only created at compile time through macros." as described in this post:
+	//	https://community.gamedev.tv/t/onanydamagetaken-arguments/199646
+	UFUNCTION()
+	void DamageTaken(AActor* DamagedActor
+		, float Damage
+		, const UDamageType* DamageType
+		, class AController* InstigatedBy //forward declaring this so need the "class" keyword
+		, AActor* DamageCauser);
 
 public:	
 	// Called every frame
