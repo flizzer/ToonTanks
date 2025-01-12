@@ -42,11 +42,11 @@ void ATank::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
     //check if PlayerControllerRef is a valid pointer; returns true if not a NULL pointer -- bhd
-    if (PlayerControllerRef)
+    if (TankPlayerController)
     {
         //HitResult being passed by reference and populated kind of like an "out" param in C#
         FHitResult HitResult;
-        PlayerControllerRef->GetHitResultUnderCursor(
+        TankPlayerController->GetHitResultUnderCursor(
             ECollisionChannel::ECC_Visibility,
             false,
             HitResult
@@ -67,12 +67,22 @@ void ATank::Tick(float DeltaTime)
     }
 }
 
+void ATank::HandleDestruction()
+{
+    Super::HandleDestruction();
+
+    // not destroying the tank, but rather hiding it and disabling the tick so we can't see it or move it
+    // this way we can see from it's POV still
+    SetActorHiddenInGame(true);
+    SetActorTickEnabled(false);
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-    PlayerControllerRef = Cast<APlayerController>(GetController());
+    TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 void ATank::Move(float Value)

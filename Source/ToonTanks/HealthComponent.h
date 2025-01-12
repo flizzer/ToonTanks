@@ -6,7 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TOONTANKS_API UHealthComponent : public UActorComponent
 {
@@ -36,6 +35,9 @@ private:
 		, const UDamageType* DamageType
 		, class AController* InstigatedBy //forward declaring this so need the "class" keyword
 		, AActor* DamageCauser);
+
+	class AToonTanksGameMode* ToonTanksGameMode;
+	//class AToonTanksGameMode* ToonTanksGameMode;
 
 public:	
 	// Called every frame

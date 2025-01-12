@@ -50,7 +50,7 @@ void AProjectile::OnHit(
 	//UE_LOG(LogTemp, Warning, TEXT("OnHit"));
 
 	AActor* MyOwner = GetOwner();
-	if (MyOwner == nullptr) return;
+	if (MyOwner == nullptr) return;                                                                                     
 
 	AController* MyOwnerInstigator = MyOwner->GetInstigatorController();
 	UClass* DamageTypeClass = UDamageType::StaticClass();

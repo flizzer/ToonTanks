@@ -4,6 +4,7 @@
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+
 //#include "DrawDebugHelpers.h" //Don't really need this though since already included in the inheritance chain further up -- bhd
 #include "Projectile.h"
 
@@ -26,6 +27,12 @@ ABasePawn::ABasePawn()
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileSpawnPoint"));
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 }
+
+void ABasePawn::HandleDestruction()
+{
+	// TODO:  Visual/sound effects
+}
+
 
 void ABasePawn::RotateTurret(FVector LookAtTarget)
 {
