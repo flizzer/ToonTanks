@@ -22,5 +22,6 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 
 	private:
 		class ATank* Tank;
+		class AToonTanksPlayerController* ToonTanksPlayerController;
 	
 };
