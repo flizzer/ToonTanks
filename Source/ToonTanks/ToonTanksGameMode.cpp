@@ -29,8 +29,6 @@ void AToonTanksGameMode::BeginPlay()
 	HandleGameStart();
 }
 
-	
-
 void AToonTanksGameMode::HandleGameStart()
 {
 	Tank = Cast<ATank>
@@ -39,6 +37,8 @@ void AToonTanksGameMode::HandleGameStart()
 	ToonTanksPlayerController = Cast<AToonTanksPlayerController>
 		(UGameplayStatics::GetPlayerController(this
 			, 0));
+
+	StartGame();
 
 	if (ToonTanksPlayerController)
 	{
