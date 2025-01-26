@@ -50,7 +50,11 @@ void AProjectile::OnHit(
 	//UE_LOG(LogTemp, Warning, TEXT("OnHit"));
 
 	AActor* MyOwner = GetOwner();
-	if (MyOwner == nullptr) return;                                                                                     
+	if (MyOwner == nullptr)
+	{
+		Destroy();
+		return;
+	}
 
 	AController* MyOwnerInstigator = MyOwner->GetInstigatorController();
 	UClass* DamageTypeClass = UDamageType::StaticClass();
@@ -66,6 +70,16 @@ void AProjectile::OnHit(
 			this,
 			DamageTypeClass
 			);
-		Destroy();	
+
+		if (HitParticles)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(
+			this
+			, HitParticles
+			, GetActorLocation()
+			, GetActorRotation()
+			);
+		}
 	}
+	Destroy();	
 }
