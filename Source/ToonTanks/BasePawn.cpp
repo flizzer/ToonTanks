@@ -4,6 +4,7 @@
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystem.h"
 
 //#include "DrawDebugHelpers.h" //Don't really need this though since already included in the inheritance chain further up -- bhd
 #include "Projectile.h"
@@ -30,7 +31,14 @@ ABasePawn::ABasePawn()
 
 void ABasePawn::HandleDestruction()
 {
-	// TODO:  Visual/sound effects
+	if (ExplosionParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(
+			this
+			, ExplosionParticles
+			, GetActorLocation()
+			, GetActorRotation());
+	}
 }
 
 
