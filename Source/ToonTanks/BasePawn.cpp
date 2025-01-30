@@ -39,6 +39,15 @@ void ABasePawn::HandleDestruction()
 			, GetActorLocation()
 			, GetActorRotation());
 	}
+
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(
+	this
+		, DeathSound
+		, GetActorLocation());	
+	}
+
 }
 
 
