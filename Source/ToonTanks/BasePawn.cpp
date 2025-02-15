@@ -48,6 +48,13 @@ void ABasePawn::HandleDestruction()
 		, GetActorLocation());	
 	}
 
+	if (DeathCameraShakeClass)
+	{
+		GetWorld()
+			->GetFirstPlayerController()
+			->ClientStartCameraShake(DeathCameraShakeClass);
+	}
+
 }
 
 

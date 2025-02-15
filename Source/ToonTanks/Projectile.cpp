@@ -94,15 +94,24 @@ void AProjectile::OnHit(
 			, GetActorRotation()
 			);
 		}
+
+		if (HitSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+			this
+			, HitSound
+			, GetActorLocation());	
+		}
+
+		if (HitCameraShakeClass)
+		{
+			GetWorld()
+				->GetFirstPlayerController()
+				->ClientStartCameraShake(HitCameraShakeClass);	
+		}
 	}
 
-	if (HitSound)
-	{
-		UGameplayStatics::PlaySoundAtLocation(
-		this
-		, HitSound
-		, GetActorLocation());	
-	}
+
 	
 	Destroy();	
 }
