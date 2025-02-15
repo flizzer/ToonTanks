@@ -40,7 +40,13 @@ void ATower::BeginPlay()
 
 void ATower::CheckFireCondition()
 {
-    if (InFireRange())
+    //According to Stephen Ulibarri, Epic's best practices recommend always using curly braces
+    //, even if the if body is a single line.  Also, makes it more explicit/descriptive
+    if (Tank == nullptr)
+    {
+        return;
+    }
+    if (InFireRange() && Tank->bAlive)
     {
         Fire();
     }

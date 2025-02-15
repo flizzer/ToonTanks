@@ -75,6 +75,7 @@ void ATank::HandleDestruction()
     // this way we can see from it's POV still
     SetActorHiddenInGame(true);
     SetActorTickEnabled(false);
+    bAlive = false;
 }
 
 // Called when the game starts or when spawned
